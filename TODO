@@ -1,0 +1,6 @@
+1. Clone decidim project (i.e. decidim-barcelona) master branch.  # --app
+2. Create database and pull production data                       # --heroku-api-key --heroku-db --heroku-app --db-url
+3. Update decidim decidim-dev gems
+4. Run decidim:upgrade rake task
+5. Run db:migrate task
+6. Create git branch for the update and push to Github            # --github-api-key
