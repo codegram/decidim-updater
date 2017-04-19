@@ -22,7 +22,7 @@ bundle install
 bundle exec rake db:create db:schema:load
 
 # 4. Update decidim
-bundle exec bundle update decidim decidim-dev
+bundle update decidim decidim-dev
 
 # 5. Run decidim:upgrade and migrate db
 bundle exec rake decidim:upgrade db:migrate
