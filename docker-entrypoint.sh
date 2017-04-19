@@ -10,24 +10,24 @@ now=`date +"%s"`
 [ -z "$DECIDIM_GITHUB_ORGANIZATION" ] && echo "You must provide a DECIDIM_GITHUB_ORGANIZATION environment variable" && exit 1;
 [ -z "$DECIDIM_GITHUB_REPO" ] && echo "You must provide a DECIDIM_GITHUB_REPO environment variable" && exit 1;
 
-# 1. Clone repository
+echo "1. Clone repository"
 git clone https://$GITHUB_USER:$GITHUB_PASSWORD@github.com/$GITHUB_ORGANIZATION/$GITHUB_REPO.git && cd $GITHUB_REPO
-git remote add decidim https://github.com/$DECIDIM_GITHUB_ORGANIZATION/$DECIDIM_GITHUB_REPO.git
+git remote add decidim https://github.com/$DECIDIM_GITHUB_ORGANIZATION/$DECIDIM_GITHUB_REPO.git && git fetch decidim
 git reset --hard decidim/master
 
-# 2. Install gems
+echo "2. Install gems"
 bundle install
 
-# 3. Create db and load schema
+echo "3. Create db and load schema"
 bundle exec rake db:create db:schema:load
 
-# 4. Update decidim
+echo "4. Update decidim"
 bundle update decidim decidim-dev
 
-# 5. Run decidim:upgrade and migrate db
+echo "5. Run decidim:upgrade and migrate db"
 bundle exec rake decidim:upgrade db:migrate
 
-# 6. Create git branch and PR for upgrade decidim
+echo "6. Create git branch and PR for upgrade decidim"
 git config --global user.email $GIT_EMAIL
 git config --global user.name $GIT_USERNAME
 git checkout -b update-decidim-${DECIDIM_VERSION:-$now}
