@@ -61,6 +61,10 @@ echo "4. Update decidim"
 old_revision=$(get_revision)
 bundle update decidim decidim-dev
 new_revision=$(get_revision)
+if [ "$old_revision" == "$new_revision" ]; then
+  echo "Nothing to do."
+  exit 0
+fi
 
 echo "5. Run decidim:upgrade and migrate db"
 bundle exec rake decidim:upgrade db:migrate
