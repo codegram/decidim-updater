@@ -6,8 +6,7 @@ Finally, it creates a PR against the original repository.
 ## Usage
 
 ```bash
-docker run -e GITHUB_USER=xxx
-           -e GITHUB_PASSWORD=xxx
+docker run -e GITHUB_OAUTH_TOKEN=xxx
            -e GITHUB_ORGANIZATION=xxx
            -e GITHUB_REPO=xxx
            -e DECIDIM_GITHUB_ORGANIZATION=xxx
@@ -19,8 +18,7 @@ docker run -e GITHUB_USER=xxx
 
 The docker image uses the following environment variables:
 
-- **`GITHUB_USER`**: The github user to clone the repository.
-- **`GITHUB_PASSWORD`**: The password used to authenticate the user in Github.
+- **`GITHUB_OAUTH_TOKEN`**: The github personal token.
 - **`GITHUB_ORGANIZATION`**: The github organization who has created a fork from a decidim application.
 - **`GITHUB_REPOSITORY`**: The github repository which is a fork from a decidim application.
 - **`DECIDIM_GITHUB_ORGANIZATION`**: The github organization who was created a decidim application.
