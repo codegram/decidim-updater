@@ -27,6 +27,7 @@ RUN apt-get update && apt-get install -y \
   libxml2-dev \
   libxslt-dev \
   nodejs \
+  jq \
   && rm -rf /var/cache/apt/*
 
 # Create working directory
