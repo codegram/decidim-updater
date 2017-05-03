@@ -80,7 +80,8 @@ if [ "$last_timestamp" == "" ]; then
       \"title\": \"Update Decidim\",
       \"base\":\"master\",
       \"head\":\"$GITHUB_ORGANIZATION:$branch_name\",
-      \"body\":\"Changes https://github.com/decidim/decidim/compare/$old_revision...$new_revision\"
+      \"body\":\"Changes https://github.com/decidim/decidim/compare/$old_revision...$new_revision\",
+      \"maintainer_can_modify\":true
     }" \
     https://api.github.com/repos/$DECIDIM_GITHUB_ORGANIZATION/$DECIDIM_GITHUB_REPO/pulls?access_token=$GITHUB_OAUTH_TOKEN
 else
