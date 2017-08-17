@@ -19,6 +19,8 @@ git config --global user.email $GIT_EMAIL
 
 echo "1. Clone repository"
 git clone https://$GITHUB_OAUTH_TOKEN@github.com/$GITHUB_ORGANIZATION/$GITHUB_REPO.git && cd $GITHUB_REPO
+git remote add decidim https://github.com/$DECIDIM_GITHUB_ORGANIZATION/$DECIDIM_GITHUB_REPO.git && git fetch decidim
+git reset --hard decidim/master
 
 echo "2. Install gems"
 bundle install
