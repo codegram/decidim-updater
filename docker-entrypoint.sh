@@ -6,23 +6,6 @@ function get_decidim_version() {
   bundle show decidim | awk -F'-' '{print $NF}'
 }
 
-function get_last_pr_info() {
-  cat last_prs.json | \
-  jq '.[] | { info: ((.number | tostring) + "-" + .head.label) }' | \
-  grep decidim-bot | \
-  head -1
-}
-
-function get_last_id() {
-  echo $(get_last_pr_info) | \
-  awk -F'-' '{print $1}' | awk -F'"' '{print $NF}'
-}
-
-function get_last_timestamp() {
-  echo $(get_last_pr_info) | \
-  awk -F'-' '{print substr($NF, 1, length($NF)-1)}'
-}
-
 # Environment checks
 [ -z "$GITHUB_ORGANIZATION" ] && echo "You must provide a GITHUB_ORGANIZATION environment variable" && exit 1;
 [ -z "$GITHUB_REPO" ] && echo "You must provide a GITHUB_REPO environment variable" && exit 1;
@@ -44,9 +27,9 @@ echo "3. Create db and load schema"
 bundle exec rake db:create db:schema:load
 
 echo "4. Update decidim"
-old_decidim_version = get_decidim_version()
+old_decidim_version = $(get_decidim_version)
 bundle update decidim decidim-dev
-decidim_version = get_decidim_version()
+decidim_version = $(get_decidim_version)
 
 echo "5. Run decidim:upgrade and migrate db"
 bundle exec rake decidim:upgrade db:migrate
