@@ -27,9 +27,9 @@ echo "3. Create db and load schema"
 bundle exec rake db:create db:schema:load
 
 echo "4. Update decidim"
-old_decidim_version = $(get_decidim_version)
+old_decidim_version=$(get_decidim_version)
 bundle update decidim decidim-dev
-decidim_version = $(get_decidim_version)
+decidim_version=$(get_decidim_version)
 
 echo "5. Run decidim:upgrade and migrate db"
 bundle exec rake decidim:upgrade db:migrate
